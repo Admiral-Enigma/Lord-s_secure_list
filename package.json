@@ -1,0 +1,17 @@
+{
+  "name": "lords_secure_list",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "electron index.js"
+  },
+  "author": "Lord Squirrel",
+  "license": "MIT",
+  "dependencies": {
+    "level": "^1.5.0",
+    "level-sublevel": "^6.6.1",
+    "vue": "^2.1.8",
+    "yo-yo": "^1.3.2"
+  }
+}
