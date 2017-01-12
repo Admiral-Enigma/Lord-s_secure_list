@@ -1,7 +1,16 @@
-
+var level = require('level-browserify')
+var yo = require('yo-yo')
+var db = level('./db')
 var mes = []
 var mesInput = input()
 var el = listMessages(mes, handleClick)
+
+db.get('name', function (err, value) {
+  if (err) return console.log('Ooops!', err) // likely the key was not found
+
+  // ta da!
+  console.log('asdname=' + value)
+})
 
 function listMessages(list, onclick){
   return yo`<div>encrypted Messasges
