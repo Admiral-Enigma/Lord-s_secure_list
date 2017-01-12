@@ -1,7 +1,6 @@
+
 var mes = []
-
 var mesInput = input()
-
 var el = listMessages(mes, handleClick)
 
 function listMessages(list, onclick){
