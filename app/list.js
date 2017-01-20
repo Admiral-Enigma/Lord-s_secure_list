@@ -1,9 +1,21 @@
 var level = require('level-browserify')
 var yo = require('yo-yo')
 var db = level('./db')
+window.CryptoJS = require('browserify-cryptojs');
+require('browserify-cryptojs/components/enc-base64');
+require('browserify-cryptojs/components/md5');
+require('browserify-cryptojs/components/evpkdf');
+require('browserify-cryptojs/components/cipher-core');
+require('browserify-cryptojs/components/aes');
+
+
 var mes = []
 var mesInput = input()
 var el = listMessages(mes, handleClick)
+
+
+var masterpass = '' + Math.floor(Math.random() * 9000) + 1000
+
 
 db.get('name', function (err, value) {
   if (err) return console.log('Ooops!', err) // likely the key was not found
@@ -28,11 +40,13 @@ function input(){
 }
 
 function handleClick() {
-  mes.push(mesInput.value)
-  mesInput.value = ''
+  if (mesInput.value != '') {
+    mes.push(CryptoJS.AES.encrypt(mesInput.value, masterpass).toString())
+    mesInput.value = ''
 
-  var newEl = listMessages(mes, handleClick)
-  yo.update(el, newEl)
+    var newEl = listMessages(mes, handleClick)
+    yo.update(el, newEl)
+  }
 }
 
 document.body.appendChild(el)
